@@ -1,0 +1,29 @@
+<html>
+
+<H1>
+
+    Register<br>
+    
+ welcome user
+</H1>
+<div>
+
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+</div>
+</html>
+<!-- base.html or specific template -->
+{% block scripts %}
+<script>
+// JavaScript code here
+function handleBackButtonBehavior() {
+    window.history.pushState(null, null, window.location.href);
+    window.onpopstate = function() {
+        window.history.pushState(null, null, window.location.href);
+    };
+}
+handleBackButtonBehavior();
+</script>
+{% endblock %}
