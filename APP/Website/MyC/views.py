@@ -12,11 +12,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .decorator import unauthenticate_user , allowed_users , admin_only
 from django.contrib.auth.views import LogoutView 
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.forms import UserCreationForm
 # Create your views here.
 
 #Login_method here
-
 @unauthenticate_user
 def login_user(request):
     request.session.flush()
@@ -35,7 +34,7 @@ def login_user(request):
     else:
         return render(request, 'MyC/Login.html')
 
-
+#Homepage
 @login_required(login_url='login')
 @admin_only#Decarotor
 def home(request):
@@ -51,8 +50,8 @@ def home(request):
 
     return   render(request, 'MyC/Home.html')
 
-
-
+#register
+@login_required
 def register(request):
     return render (request, 'MyC/Register.html')
 
@@ -65,3 +64,21 @@ class CustomLogoutView(LogoutView):
         # Clear the session
         request.session.flush()
         return super().dispatch(request, *args, **kwargs)
+    
+ #jkdm page admin   
+@login_required    
+def JKDM_admin(request):
+    return render(request, 'MyC/JKDM_admin.html')
+
+ #jkdm page user   
+@login_required
+def JKDM_user(request):
+    return render(request, 'MyC/JKDM_user.html')
+
+#User Registration
+
+def Register_user(request):
+    form = UserCreationForm()
+    context = {'form':form}
+
+    return render(request, 'Myc/Register_user.html',context)

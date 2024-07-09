@@ -32,11 +32,11 @@ def admin_only(view_func):
         if group == 'user':
             return redirect('register')#render(request, 'MyC/Register.html')
         
-        if group == ('user'and'JKDM'):
-            return render(request, 'MyC/Home.html')
+        if group == 'JKDM_user':
+            return redirect('JKDM_user') #render(request, 'MyC/Home.html')
         
-        if group == ('admin'and'JKDM'):
-            return render(request, 'MyC/Home.html')
+        if group == 'JKDM_admin':
+            return redirect('JKDM_admin') #render(request, 'MyC/Home.html')
         
         if group == 'admin' :
             return view_func(request,*args,**kwargs)
